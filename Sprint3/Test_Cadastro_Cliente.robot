@@ -1,78 +1,90 @@
 *** Settings ***
 Library    SeleniumLibrary
-Library    Collections             
-Test Teardown    Close Browser       
+Test Teardown    Close Browser
 
 *** Variables ***
 ${URL}        https://www.prophet.build/dashboard
-${PROFILE}    C:/Projeto Prophet/chrome-profile-prophet
+${EMAIL}      pcfmuniz@yahoo.com.br
 
 *** Test Cases ***
 Fluxo de acesso e cadastro de cliente
-    Dado que acesso o Dashboard Prophet
+    Abrir Prophet
+    Fazer Login Via Magic Link Se Necessario
     E clico em Clientes
-    
-    Entao sou direcionado para a pagina de produtos
-    Quando clico no produto    Picture of Blue Jeans    1,00
-    Então sou direcionado para a pagina do produto
-    Quando clico em adicionar no carrinho
-    Entao visualizo o numero de itens no carrinho    1
-    Quando clico no icone do carrinho
-    Entao sou direcionado para a pagina do carrinho
-    E confirmo se a descrição do produto no carrinho esta correta
-    Quando clico Remover Item
-    E clico em Atualizar Carrinho de Compras
-    Entao sou direcionado para a pagina Carrinho de Compras
+    Quando clico no cliente Squad 145
+    Quando clico em Nova Tarefa
+    E envio pergunta sobre o cliente Squad 145
+
+    E clico em Clientes
+    Quando clico no cliente Squad 145
+    Quando clico na aba Conhecimento
+    Quando abro a pasta Squad 145 Marketing
+    Quando abro o arquivo Teste.txt
 
 *** Keywords ***
-Dado que acesso o Dashboard Prophet
-    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
-    Call Method    ${options}    add_argument    --user-data-dir\=${PROFILE}
-    Call Method    ${options}    add_argument    --start-maximized
-    Create WebDriver    Chrome    options=${options}
-    Go To    ${URL}
-    Sleep    15s
-
+Abrir Prophet
+    Open Browser    ${URL}    Chrome
+    Maximize Browser Window
+Fazer Login Via Magic Link Se Necessario
+    Wait Until Element Is Visible    xpath=//input[@placeholder="Endereço de email"]    30s
+    Input Text    xpath=//input[@placeholder="Endereço de email"]    ${EMAIL}
+    Click Element    xpath=//button[@role="checkbox"]
+    Wait Until Element Is Enabled    xpath=//button[contains(.,"Enviar magic link")]    10s
+    Click Button    xpath=//button[contains(.,"Enviar magic link")]
+    Log To Console    Abra seu e-mail, clique no link mágico da Prophet e aguarde o Dashboard abrir. Você tem 80 segundos.
+    Sleep    80s
+    ${abas}=    Get Window Handles
+    FOR    ${aba}    IN    @{abas}
+        Switch Window    ${aba}
+        ${url_atual}=    Get Location
+        Log To Console    ABA ENCONTRADA: ${url_atual}
+    END
 E clico em Clientes
-    Wait Until Element Is Visible    css=button[aria-label="Clientes"]    30s
+    Wait Until Element Is Visible    css=button[aria-label="Clientes"]    10s
     Click Element    css=button[aria-label="Clientes"]
-
-
-
-
-
-
-Entao sou direcionado para a pagina de produtos
-    Element Text Should Be    css=h1    Apparel & Shoes
-Quando clico no produto
-    [Arguments]    ${Produto}    ${Price}
-    Wait Until Element Is Visible    css=img[alt="${Produto}"]    ${timeout}
-    Click Element    css=img[alt="${Produto}"]
-Então sou direcionado para a pagina do produto
-    Element Attribute Value Should Be    id=main-product-img-36    alt    Picture of Blue Jeans
-    Element Text Should Be    css=span[itemprop="price"]    1.00
-Quando clico em adicionar no carrinho
-    Click Button    id=add-to-cart-button-36
-Entao visualizo o numero de itens no carrinho
-    [Arguments]    ${Items}
-    Set Test Variable    ${Cart_items}    ${Items}
-    Wait Until Element Contains    css=span.cart-qty    ${Cart_items}    ${timeout}
-Quando clico no icone do carrinho
-    Click Element    css=span.cart-label
-Entao sou direcionado para a pagina do carrinho
-    Wait Until Element Is Visible    css=h1    ${timeout}
-    Element Text Should Be    css=h1    Shopping cart
-E confirmo se a descrição do produto no carrinho esta correta
-    Wait Until Element Is Visible    css=a.product-name    ${timeout}
-    Element Text Should Be    css=a.product-name    Blue Jeans
-    Element Text Should Be    css=span.product-unit-price    1.00
-Quando clico Remover Item
-    Click Element    name=removefromcart
-E clico em Atualizar Carrinho de Compras
-    Click Button    name=updatecart
-Entao sou direcionado para a pagina Carrinho de Compras
-    Wait Until Element Is Visible    css=h1    ${timeout}
-    Element Text Should Be    css=h1    Shopping cart
-
-
-
+    Sleep    5s
+    ${url_atual}=    Get Location
+    Log To Console    URL APOS CLICAR EM CLIENTES: ${url_atual}
+    Sleep    10s
+Quando clico no cliente Squad 145
+    Wait Until Location Contains    /clients    10s
+    Wait Until Page Contains    Squad 145 Marketing    10s
+    Click Element    xpath=(//*[normalize-space(.)="Squad 145 Marketing"])[1]
+    Sleep    5s
+    ${url}=    Get Location
+    Log To Console    URL APOS CLICAR NO CLIENTE: ${url}
+Quando clico em Nova Tarefa
+    Wait Until Location Contains    /clients/    10s
+    Sleep    3s
+    ${clicou}=    Execute Javascript
+    ...    const elementos = [...document.querySelectorAll('button, a, [role="button"]')];
+    ...    const botao = elementos.find(e => e.innerText && (e.innerText.includes('Nova Tarefa') || e.innerText.includes('New Task')));
+    ...    if (botao) { botao.click(); return true; }
+    ...    return false;
+    Should Be True    ${clicou}
+    Sleep    3s
+E envio pergunta sobre o cliente Squad 145
+    Wait Until Element Is Visible    xpath=//textarea[contains(@placeholder,"Descreva")]    20s
+    Input Text    xpath=//textarea[contains(@placeholder,"Descreva")]    Mostrar informações sobre o cliente Squad 145 Marketing
+    Press Keys    xpath=//textarea[contains(@placeholder,"Descreva")]    ENTER
+    Sleep    40s
+Quando clico na aba Conhecimento
+    Wait Until Element Is Visible    css=button[role="tab"][id$="trigger-knowledge"]    20s
+    Click Element    css=button[role="tab"][id$="trigger-knowledge"]
+    Sleep    3s
+Quando abro a pasta Squad 145 Marketing
+    Wait Until Element Is Visible
+    ...    xpath=//h3[normalize-space(.)="Squad 145 Marketing"]
+    ...    20s
+    Click Element
+    ...    xpath=//h3[normalize-space(.)="Squad 145 Marketing"]
+    Sleep    3s
+    ${url}=    Get Location
+    Log To Console    URL APÓS ABRIR PASTA: ${url}
+Quando abro o arquivo Teste.txt
+    Wait Until Element Is Visible    xpath=//h3[normalize-space(.)="Teste.txt"]    20s
+    Click Element    xpath=//h3[normalize-space(.)="Teste.txt"]
+    Sleep    5s
+    ${url}=    Get Location
+    Log To Console    URL APÓS ABRIR ARQUIVO: ${url}
+    Sleep    5s
