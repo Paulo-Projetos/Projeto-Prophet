@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.13.1 on win32)" generated="2026-06-27T11:21:26.723557" rpa="false" schemaversion="5">
+<suite id="s1" name="Test Cadastro Cliente copy" source="c:\Projeto Prophet\Sprint3\Test_Cadastro_Cliente copy.robot">
+<test id="s1-t1" name="Fluxo de acesso e cadastro de cliente" line="10">
+<kw name="Abrir Prophet">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:21:27.404713" level="INFO">Opening browser 'Chrome' to base url 'https://www.prophet.build/dashboard'.</msg>
+<arg>${URL}</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-06-27T11:21:27.403987" elapsed="5.911444"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-06-27T11:21:33.316166" elapsed="0.210928"/>
+</kw>
+<status status="PASS" start="2026-06-27T11:21:27.402055" elapsed="6.126238"/>
+</kw>
+<kw name="Fazer Login Via Magic Link Se Necessario">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//input[@placeholder="Endereço de email"]</arg>
+<arg>30s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-27T11:21:33.536290" elapsed="0.584210"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:21:34.123309" level="INFO">Typing text 'pcfmuniz@yahoo.com.br' into text field 'xpath=//input[@placeholder="Endereço de email"]'.</msg>
+<arg>xpath=//input[@placeholder="Endereço de email"]</arg>
+<arg>${EMAIL}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-27T11:21:34.121597" elapsed="0.437544"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:21:34.560006" level="INFO">Clicking element 'xpath=//button[@role="checkbox"]'.</msg>
+<arg>xpath=//button[@role="checkbox"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-27T11:21:34.559581" elapsed="0.165593"/>
+</kw>
+<kw name="Wait Until Element Is Enabled" owner="SeleniumLibrary">
+<arg>xpath=//button[contains(.,"Enviar magic link")]</arg>
+<arg>10s</arg>
+<doc>Waits until the element ``locator`` is enabled.</doc>
+<status status="PASS" start="2026-06-27T11:21:34.725652" elapsed="0.048390"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:21:34.774961" level="INFO">Clicking button 'xpath=//button[contains(.,"Enviar magic link")]'.</msg>
+<arg>xpath=//button[contains(.,"Enviar magic link")]</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-27T11:21:34.774515" elapsed="0.182118"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Abra seu e-mail, clique no link mágico da Prophet e aguarde o Dashboard abrir. Você tem 80 segundos.</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-06-27T11:21:34.957147" elapsed="0.002777"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:22:54.964869" level="INFO">Slept 1 minute 20 seconds.</msg>
+<arg>80s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:21:34.960424" elapsed="80.005051"/>
+</kw>
+<kw name="Get Window Handles" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:22:54.979348" level="INFO">${abas} = ['EE002E699B88E8461850DAC7358EC025']</msg>
+<var>${abas}</var>
+<doc>Returns all child window handles of the selected browser as a list.</doc>
+<status status="PASS" start="2026-06-27T11:22:54.966225" elapsed="0.013456"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${aba}</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="PASS" start="2026-06-27T11:22:54.980526" elapsed="0.010131"/>
+</kw>
+<kw name="Get Location" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:22:55.001857" level="INFO">${url_atual} = https://prophet.build/dashboard</msg>
+<var>${url_atual}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="PASS" start="2026-06-27T11:22:54.991106" elapsed="0.010944"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>ABA ENCONTRADA: ${url_atual}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-06-27T11:22:55.002322" elapsed="0.000504"/>
+</kw>
+<var name="${aba}">EE002E699B88E8461850DAC7358EC025</var>
+<status status="PASS" start="2026-06-27T11:22:54.980275" elapsed="0.022739"/>
+</iter>
+<var>${aba}</var>
+<value>@{abas}</value>
+<status status="PASS" start="2026-06-27T11:22:54.979932" elapsed="0.023280"/>
+</for>
+<status status="PASS" start="2026-06-27T11:21:33.535587" elapsed="81.467932"/>
+</kw>
+<kw name="E clico em Clientes">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=button[aria-label="Clientes"]</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-27T11:22:55.005562" elapsed="0.024948"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:22:55.031074" level="INFO">Clicking element 'css=button[aria-label="Clientes"]'.</msg>
+<arg>css=button[aria-label="Clientes"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-27T11:22:55.030809" elapsed="0.150965"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:23:00.182865" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:22:55.182223" elapsed="5.001836"/>
+</kw>
+<kw name="Get Location" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:23:00.192865" level="INFO">${url_atual} = https://prophet.build/clients</msg>
+<var>${url_atual}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="PASS" start="2026-06-27T11:23:00.184553" elapsed="0.008616"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>URL APOS CLICAR EM CLIENTES: ${url_atual}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-06-27T11:23:00.193562" elapsed="0.004397"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:23:10.200208" level="INFO">Slept 10 seconds.</msg>
+<arg>10s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:23:00.199001" elapsed="10.001719"/>
+</kw>
+<status status="PASS" start="2026-06-27T11:22:55.004918" elapsed="15.196246"/>
+</kw>
+<kw name="Quando clico no cliente Squad 145">
+<kw name="Wait Until Location Contains" owner="SeleniumLibrary">
+<arg>/clients</arg>
+<arg>15s</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-06-27T11:23:10.210459" elapsed="0.026795"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Squad 145 Marketing</arg>
+<arg>15s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-06-27T11:23:10.237676" elapsed="0.022837"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:23:10.265739" level="INFO">Clicking element 'xpath=(//*[normalize-space(.)="Squad 145 Marketing"])[1]'.</msg>
+<arg>xpath=(//*[normalize-space(.)="Squad 145 Marketing"])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-27T11:23:10.264037" elapsed="0.155117"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:23:15.422386" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:23:10.420464" elapsed="5.002536"/>
+</kw>
+<kw name="Get Location" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:23:15.433446" level="INFO">${url} = https://prophet.build/clients/c46577aa-1976-44f9-b79e-8919b7ebab91</msg>
+<var>${url}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="PASS" start="2026-06-27T11:23:15.423790" elapsed="0.010346"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>URL APOS CLICAR NO CLIENTE: ${url}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-06-27T11:23:15.435090" elapsed="0.001021"/>
+</kw>
+<status status="PASS" start="2026-06-27T11:23:10.209402" elapsed="5.227046"/>
+</kw>
+<kw name="Quando clico em Nova Tarefa">
+<kw name="Wait Until Location Contains" owner="SeleniumLibrary">
+<arg>/clients/</arg>
+<arg>15s</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-06-27T11:23:15.438996" elapsed="0.008133"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:23:18.448009" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:23:15.447508" elapsed="3.001107"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:23:18.449658" level="INFO">Executing JavaScript:
+const elementos = [...document.querySelectorAll('button, a, [role="button"]')];const botao = elementos.find(e =&gt; e.innerText &amp;&amp; (e.innerText.includes('Nova Tarefa') || e.innerText.includes('New Task')));if (botao) { botao.click(); return true; }return false;
+Without any arguments.</msg>
+<msg time="2026-06-27T11:23:18.473972" level="INFO">${clicou} = True</msg>
+<var>${clicou}</var>
+<arg>const elementos = [...document.querySelectorAll('button, a, [role="button"]')];</arg>
+<arg>const botao = elementos.find(e =&gt; e.innerText &amp;&amp; (e.innerText.includes('Nova Tarefa') || e.innerText.includes('New Task')));</arg>
+<arg>if (botao) { botao.click(); return true; }</arg>
+<arg>return false;</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2026-06-27T11:23:18.448926" elapsed="0.025325"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${clicou}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-06-27T11:23:18.474643" elapsed="0.000426"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:23:21.501029" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:23:18.475370" elapsed="3.026286"/>
+</kw>
+<status status="PASS" start="2026-06-27T11:23:15.437737" elapsed="6.064189"/>
+</kw>
+<kw name="E envio pergunta sobre o cliente Squad 145">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//textarea[contains(@placeholder,"Descreva")]</arg>
+<arg>20s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-27T11:23:21.519227" elapsed="0.057258"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:23:21.577358" level="INFO">Typing text 'Mostrar informações sobre o cliente Squad 145 Marketing' into text field 'xpath=//textarea[contains(@placeholder,"Descreva")]'.</msg>
+<arg>xpath=//textarea[contains(@placeholder,"Descreva")]</arg>
+<arg>Mostrar informações sobre o cliente Squad 145 Marketing</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-27T11:23:21.576907" elapsed="0.540139"/>
+</kw>
+<kw name="Press Keys" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:23:22.118925" level="INFO">Sending key(s) ('ENTER',) to xpath=//textarea[contains(@placeholder,"Descreva")] element.</msg>
+<msg time="2026-06-27T11:23:22.458795" level="INFO">Pressing special key ENTER to element.</msg>
+<msg time="2026-06-27T11:23:22.459149" level="INFO">Releasing special key ENTER.</msg>
+<arg>xpath=//textarea[contains(@placeholder,"Descreva")]</arg>
+<arg>ENTER</arg>
+<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
+<status status="PASS" start="2026-06-27T11:23:22.117520" elapsed="0.387667"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:23:52.506682" level="INFO">Slept 30 seconds.</msg>
+<arg>30s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:23:22.505617" elapsed="30.001663"/>
+</kw>
+<status status="PASS" start="2026-06-27T11:23:21.518590" elapsed="30.989050"/>
+</kw>
+<kw name="E clico em Clientes">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=button[aria-label="Clientes"]</arg>
+<arg>15s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-27T11:23:52.511988" elapsed="0.063960"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:23:52.576767" level="INFO">Clicking element 'css=button[aria-label="Clientes"]'.</msg>
+<arg>css=button[aria-label="Clientes"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-27T11:23:52.576362" elapsed="0.127942"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:23:57.705675" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:23:52.704734" elapsed="5.001399"/>
+</kw>
+<kw name="Get Location" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:23:57.718600" level="INFO">${url_atual} = https://prophet.build/clients/c46577aa-1976-44f9-b79e-8919b7ebab91</msg>
+<var>${url_atual}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="PASS" start="2026-06-27T11:23:57.706489" elapsed="0.012453"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>URL APOS CLICAR EM CLIENTES: ${url_atual}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-06-27T11:23:57.719281" elapsed="0.004064"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:24:07.724651" level="INFO">Slept 10 seconds.</msg>
+<arg>10s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:23:57.723889" elapsed="10.001266"/>
+</kw>
+<status status="PASS" start="2026-06-27T11:23:52.509420" elapsed="15.216061"/>
+</kw>
+<kw name="Quando clico no cliente Squad 145">
+<kw name="Wait Until Location Contains" owner="SeleniumLibrary">
+<arg>/clients</arg>
+<arg>15s</arg>
+<doc>Waits until the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-06-27T11:24:07.727376" elapsed="0.009171"/>
+</kw>
+<kw name="Wait Until Page Contains" owner="SeleniumLibrary">
+<arg>Squad 145 Marketing</arg>
+<arg>15s</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" start="2026-06-27T11:24:07.736995" elapsed="0.014399"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:24:07.752787" level="INFO">Clicking element 'xpath=(//*[normalize-space(.)="Squad 145 Marketing"])[1]'.</msg>
+<arg>xpath=(//*[normalize-space(.)="Squad 145 Marketing"])[1]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-27T11:24:07.752238" elapsed="0.116798"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:24:12.870527" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:24:07.869554" elapsed="5.001464"/>
+</kw>
+<kw name="Get Location" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:24:12.884918" level="INFO">${url} = https://prophet.build/clients/c46577aa-1976-44f9-b79e-8919b7ebab91</msg>
+<var>${url}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="PASS" start="2026-06-27T11:24:12.871430" elapsed="0.014486"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>URL APOS CLICAR NO CLIENTE: ${url}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-06-27T11:24:12.886269" elapsed="0.000669"/>
+</kw>
+<status status="PASS" start="2026-06-27T11:24:07.726661" elapsed="5.160601"/>
+</kw>
+<kw name="Quando clico na aba Conhecimento">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=button[role="tab"][id$="trigger-knowledge"]</arg>
+<arg>20s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-27T11:24:12.896284" elapsed="0.038499"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:24:12.935767" level="INFO">Clicking element 'css=button[role="tab"][id$="trigger-knowledge"]'.</msg>
+<arg>css=button[role="tab"][id$="trigger-knowledge"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-27T11:24:12.935245" elapsed="0.137138"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:24:16.073700" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:24:13.072797" elapsed="3.001302"/>
+</kw>
+<status status="PASS" start="2026-06-27T11:24:12.890764" elapsed="3.183573"/>
+</kw>
+<kw name="Quando abro a pasta Squad 145 Marketing">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//h3[normalize-space(.)="Squad 145 Marketing"]</arg>
+<arg>20s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-27T11:24:16.093546" elapsed="0.057321"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:24:16.152393" level="INFO">Clicking element 'xpath=//h3[normalize-space(.)="Squad 145 Marketing"]'.</msg>
+<arg>xpath=//h3[normalize-space(.)="Squad 145 Marketing"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-27T11:24:16.151882" elapsed="0.103495"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:24:19.257291" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:24:16.255815" elapsed="3.001929"/>
+</kw>
+<kw name="Get Location" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:24:19.266896" level="INFO">${url} = https://prophet.build/clients/c46577aa-1976-44f9-b79e-8919b7ebab91?tab=knowledge</msg>
+<var>${url}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="PASS" start="2026-06-27T11:24:19.258093" elapsed="0.009057"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>URL APÓS ABRIR PASTA: ${url}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-06-27T11:24:19.267434" elapsed="0.003982"/>
+</kw>
+<status status="PASS" start="2026-06-27T11:24:16.091393" elapsed="3.180377"/>
+</kw>
+<kw name="Quando abro o arquivo Teste.txt">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>xpath=//h3[normalize-space(.)="Teste.txt"]</arg>
+<arg>20s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-06-27T11:24:19.274594" elapsed="0.033833"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:24:19.310661" level="INFO">Clicking element 'xpath=//h3[normalize-space(.)="Teste.txt"]'.</msg>
+<arg>xpath=//h3[normalize-space(.)="Teste.txt"]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-06-27T11:24:19.309086" elapsed="0.166372"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:24:24.477717" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:24:19.476091" elapsed="5.002279"/>
+</kw>
+<kw name="Get Location" owner="SeleniumLibrary">
+<msg time="2026-06-27T11:24:24.490458" level="INFO">${url} = https://prophet.build/clients/c46577aa-1976-44f9-b79e-8919b7ebab91?tab=knowledge</msg>
+<var>${url}</var>
+<doc>Returns the current browser window URL.</doc>
+<status status="PASS" start="2026-06-27T11:24:24.478707" elapsed="0.012121"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>URL APÓS ABRIR ARQUIVO: ${url}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-06-27T11:24:24.491144" elapsed="0.001618"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-27T11:24:29.503561" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-27T11:24:24.493242" elapsed="5.010732"/>
+</kw>
+<status status="PASS" start="2026-06-27T11:24:19.273482" elapsed="10.230851"/>
+</kw>
+<kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-06-27T11:24:29.573348" elapsed="3.442402"/>
+</kw>
+<status status="PASS" start="2026-06-27T11:21:27.400321" elapsed="185.619835"/>
+</test>
+<status status="PASS" start="2026-06-27T11:21:26.735030" elapsed="186.291008"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Test Cadastro Cliente copy" id="s1" pass="1" fail="0" skip="0">Test Cadastro Cliente copy</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
